@@ -1,0 +1,79 @@
+<div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <!-- form starts -->
+        <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" >
+          <!-- Name -->
+          <div formGroupName="fullName">
+            <div class="mb-3">
+              <label [ngClass]="{'error': submitted && myForm.fullName['controls'].firstName.errors}">
+                First name</label>
+              <input type="text" class="form-control" formControlName="firstName" [ngClass]="{'error': submitted && myForm.fullName['controls'].firstName.errors}">
+              <!-- error block -->
+              <div class="invalid-feedback" *ngIf="submitted && myForm.fullName['controls'].firstName.errors?.required">
+                <sup>*</sup>Enter your name
+              </div>
+              <div class="invalid-feedback" *ngIf="submitted && myForm.fullName['controls'].firstName.errors?.minlength">
+                <sup>*</sup>Name must be 2 characters long
+              </div>
+              <div class="invalid-feedback" *ngIf="submitted && myForm.fullName['controls'].firstName.errors?.pattern">
+                <sup>*</sup>No special charcter allowed
+              </div>
+            </div>
+            <div class="mb-3">
+              <label [ngClass]="{'error': submitted && myForm.fullName['controls'].lastName.errors}">
+                Last name</label>
+              <input type="text" class="form-control" formControlName="lastName" [ngClass]="{'error': submitted && myForm.fullName['controls'].lastName.errors}">
+              <!-- error block -->
+              <div class="invalid-feedback" *ngIf="submitted && myForm.fullName['controls'].lastName.errors?.required">
+                <sup>*</sup>Please enter your surname
+              </div>
+            </div>
+          </div>
+          <!-- Email -->
+          <div class="mb-3">
+            <label [ngClass]="{'error': submitted && myForm.email.errors}">Email</label>
+            <input #email type="email" class="form-control" formControlName="email" [ngClass]="{'error': submitted && myForm.email.errors}">
+
+            <!-- error block -->
+            <div class="invalid-feedback" *ngIf="submitted && myForm.email.errors?.required">
+              <sup>*</sup>Please enter your email
+            </div>
+            <div class="invalid-feedback" *ngIf="submitted && myForm.email.errors?.pattern">
+              <sup>*</sup>Please enter valid email
+            </div>
+          </div>
+          <!-- Password -->
+          <div formGroupName="PasswordValidation">
+              <div class="group-gap">
+                <div class="mb-3">
+                    <label [ngClass]="{'error': submitted && myForm.PasswordValidation['controls'].password.errors}">Password</label>
+                    <input #password type="password" class="form-control" formControlName="password" [ngClass]="{'error': submitted && myForm.PasswordValidation['controls'].password.errors}">
+                    <!-- error block -->
+                    <div class="invalid-feedback" *ngIf="submitted && myForm.PasswordValidation['controls'].password.errors">
+                        <sup>*</sup>Please enter password
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label [ngClass]="{'error': submitted && myForm.PasswordValidation['controls'].confirmPassword.errors}">Confirm
+                      Password</label>
+                    <input type="password" class="form-control" formControlName="confirmPassword" [ngClass]="{'error': submitted && myForm.PasswordValidation['controls'].confirmPassword.errors}">
+                </div>
+                <!-- error block -->
+                <div class="invalid-feedback" *ngIf="submitted && myForm.PasswordValidation['controls'].confirmPassword.errors">
+                    <sup>*</sup>Password mismatch
+                </div>
+              </div>
+          </div>
+          <button type="submit" class="btn btn-danger btn-lg btn-block" >Submit</button>
+        </form>
+      </div>
+    </div>
+</div>
+<router-outlet></router-outlet>
+
+<div class="container">
+    <h1>NGRX Example </h1>
+    <app-create></app-create>
+    <app-read></app-read>
+</div>
